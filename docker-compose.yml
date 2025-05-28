@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: surveydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+  server:
+    build: ./server
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/surveydb
+    volumes:
+      - ./server:/app
+    command: sh -c "npx prisma migrate deploy &&  npx prisma generate && node prisma/seed.js && node index.js"
+
+  client:
+    build: ./client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      VITE_API_URL: http://localhost:3000
+    command: npm run dev -- --host
+volumes:
+  pgdata:

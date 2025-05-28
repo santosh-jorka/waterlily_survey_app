@@ -1,0 +1,34 @@
+title: "Long-Term Care Needs Assessment"
+questions:
+  - id: 1
+    label: "What is your age?"
+    type: "number"
+
+  - id: 2
+    label: "What is your gender?"
+    type: "multiple-choice"
+    options: ["Male", "Female", "Non-binary", "Prefer not to say"]
+
+  - id: 3
+    label: "What is your marital status?"
+    type: "multiple-choice"
+    options: ["Single", "Married", "Divorced", "Widowed", "Separated"]
+
+  - id: 4
+    label: "Do you have any chronic health conditions?"
+    type: "checkbox"
+    options: ["Diabetes", "Heart Disease", "Asthma", "Hypertension", "Other"]
+
+  - id: 5
+    label: "How would you rate your overall health?"
+    type: "rating"
+    scale_min: 1
+    scale_max: 5
+
+  - id: 6
+    label: "What is your estimated annual household income?"
+    type: "number"
+
+  - id: 7
+    label: "Do you currently have any long-term care insurance?"
+    type: "yes-no"
