@@ -7,6 +7,8 @@ Email: demo@example.com, jane.doe@example.com, john.doe@example.com
 
 Frontend: http://localhost:5173
 
+Video Link = https://drive.google.com/file/d/1KPZBRSS4EeKAuqwOlVeNDWgjxACfNVKf/view?usp=sharing
+
 ## 🚀 Quick Start (with Docker)
 ```bash
 git clone https://github.com/your-username/waterlily_survey_app.git
