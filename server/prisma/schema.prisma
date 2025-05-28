@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  output          = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Answer {
+  id         Int       @id @default(autoincrement())
+  questionId Int
+  value      String
+  responseId Int?
+  createdAt  DateTime  @default(now())
+  question   Question  @relation(fields: [questionId], references: [id])
+  response   Response? @relation(fields: [responseId], references: [id])
+}
+
+model Question {
+  id           Int      @id @default(autoincrement())
+  questionText String
+  questionType String
+  displayOrder Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+  answers       Answer[]
+}
+
+model Response {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  createdAt DateTime @default(now())
+  answers    Answer[]
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  firstName  String
+  middleName String?
+  lastName   String
+  email      String     @unique
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime
+  responses   Response[]
+}
